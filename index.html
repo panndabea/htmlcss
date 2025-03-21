@@ -13,6 +13,10 @@
       --text-dark: #eee;
     }
 
+    html {
+      background: var(--bg-light);
+    }
+
     body {
       font-family: system-ui, sans-serif;
       margin: 0;
@@ -23,6 +27,12 @@
       scroll-behavior: smooth;
       transition: background 0.5s, color 0.5s;
       overflow-x: hidden;
+      animation: fadeInPage 1s ease;
+    }
+
+    @keyframes fadeInPage {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     body.dark {
@@ -57,11 +67,13 @@
       background: var(--accent);
       color: white;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
     nav button:hover {
       transform: scale(1.1);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
     }
 
     section {
@@ -69,6 +81,7 @@
       padding: 1.5rem;
       border-radius: 1rem;
       background: rgba(255, 255, 255, 0.7);
+      -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
       border: 1px solid #ccc;
       transition: background 0.3s, transform 0.3s;
@@ -101,7 +114,7 @@
       background: #2a2a2a;
     }
 
-    section:has(img) {
+    section:has(img), section img:has(+ p) {
       border-color: var(--accent);
     }
 
@@ -179,7 +192,7 @@
     <button onclick="scrollToTop()">🔝 Nach oben</button>
   </nav>
 
-  <div class="assistant" onclick="alert('👋 Ich bin dein Helfer! Hier gibt’s moderne HTML & CSS Features zu entdecken.')">
+  <div class="assistant" onclick="playSound(); alert('👋 Ich bin dein Helfer! Hier gibt’s moderne HTML & CSS Features zu entdecken.')">
     👋 Hi! Ich bin dein kleiner Assistent ✨
   </div>
 
@@ -235,6 +248,8 @@
     <button onclick="startFancyTransition()">Seitenwechsel-Effekt!</button>
   </section>
 
+  <audio id="clickSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_304ba72637.mp3?filename=click-124467.mp3"></audio>
+
   <script>
     function startFancyTransition() {
       if (!document.startViewTransition) {
@@ -253,6 +268,10 @@
 
     function scrollToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function playSound() {
+      document.getElementById('clickSound').play();
     }
   </script>
 </body>
