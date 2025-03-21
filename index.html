@@ -72,10 +72,12 @@
       border-radius: 1rem;
       display: grid;
       gap: 1rem;
+      transition: transform 0.3s;
+    }
 
-      &:hover {
-        background: #f9f9ff;
-      }
+    .card:hover {
+      background: #f9f9ff;
+      transform: scale(1.02);
     }
 
     body.dark .card {
@@ -120,6 +122,23 @@
       border-radius: 0.5rem;
       background: white;
     }
+
+    .assistant {
+      position: fixed;
+      bottom: 1rem;
+      left: 1rem;
+      background: var(--accent);
+      color: white;
+      padding: 1rem;
+      border-radius: 1rem;
+      animation: float 2s ease-in-out infinite alternate;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    @keyframes float {
+      from { transform: translateY(0); }
+      to { transform: translateY(-10px); }
+    }
   </style>
 </head>
 <body>
@@ -127,6 +146,8 @@
     <button onclick="toggleDarkMode()">🌗 Dark Mode</button>
     <button onclick="scrollToTop()">🔝 Nach oben</button>
   </nav>
+
+  <div class="assistant">👋 Hi! Ich bin dein kleiner Assistent ✨</div>
 
   <h1>🚀 Moderne HTML & CSS Features (2024/25)</h1>
 
