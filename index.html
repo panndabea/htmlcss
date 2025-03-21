@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML & CSS 2024/25 Demo</title>
+  <style>
+    :root {
+      --accent: #7e5bef;
+      --bg-light: #f0f0f0;
+      --bg-dark: #1a1a1a;
+      --text-light: #333;
+      --text-dark: #eee;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: linear-gradient(to right, var(--bg-light), #d0e0ff);
+      color: var(--text-light);
+      accent-color: var(--accent);
+      scroll-behavior: smooth;
+      transition: background 0.5s, color 0.5s;
+    }
+
+    body.dark {
+      background: linear-gradient(to right, var(--bg-dark), #2b2b2b);
+      color: var(--text-dark);
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    nav {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 1rem;
+      z-index: 1000;
+    }
+
+    nav button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      background: var(--accent);
+      color: white;
+      cursor: pointer;
+    }
+
+    section {
+      margin-bottom: 3rem;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid #ccc;
+      transition: background 0.3s;
+    }
+
+    body.dark section {
+      background: rgba(30, 30, 30, 0.5);
+      border-color: #444;
+    }
+
+    .card {
+      padding: 1rem;
+      background: white;
+      border-radius: 1rem;
+      display: grid;
+      gap: 1rem;
+
+      &:hover {
+        background: #f9f9ff;
+      }
+    }
+
+    body.dark .card {
+      background: #2a2a2a;
+    }
+
+    section:has(img) {
+      border-color: var(--accent);
+    }
+
+    .container {
+      container-type: inline-size;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    @container (min-width: 500px) {
+      .responsive-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    dialog {
+      padding: 2rem;
+      border: none;
+      border-radius: 1rem;
+      background: white;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    [popover] {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <button onclick="toggleDarkMode()">🌗 Dark Mode</button>
+    <button onclick="scrollToTop()">🔝 Nach oben</button>
+  </nav>
+
+  <h1>🚀 Moderne HTML & CSS Features (2024/25)</h1>
+
+  <section>
+    <h2>✅ Popover</h2>
+    <button popovertarget="info">Mehr Info</button>
+    <div id="info" popover>Dies ist ein natives Popover! 🎉</div>
+  </section>
+
+  <section>
+    <h2>✅ Dialog</h2>
+    <button onclick="myDialog.showModal()">Öffne Dialog</button>
+    <dialog id="myDialog">
+      <p>Dies ist ein HTML5 Dialog!</p>
+      <form method="dialog">
+        <button>Schließen</button>
+      </form>
+    </dialog>
+  </section>
+
+  <section>
+    <h2>✅ Container Query + Subgrid</h2>
+    <div class="container">
+      <div class="card responsive-card">
+        <div>
+          <strong>Ich reagiere auf meine Containergröße!</strong>
+          <p>Resize mich! 🧩</p>
+        </div>
+        <img src="https://placekitten.com/100/100" alt="Katze" />
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>✅ CSS :has()</h2>
+    <article>
+      <img src="https://placekitten.com/200/120" alt="Katze" />
+      <p>Dieser Artikel enthält ein Bild, daher hat er eine bunte Umrandung. 🐱</p>
+    </article>
+  </section>
+
+  <section>
+    <h2>✅ accent-color</h2>
+    <label><input type="checkbox" checked /> Checkbox mit custom Farbe</label><br>
+    <label><input type="radio" name="option" checked /> Option A</label>
+    <label><input type="radio" name="option" /> Option B</label>
+  </section>
+
+  <section>
+    <h2>✅ View Transition API (Chrome-only)</h2>
+    <button onclick="startFancyTransition()">Seitenwechsel-Effekt!</button>
+  </section>
+
+  <script>
+    function startFancyTransition() {
+      if (!document.startViewTransition) {
+        alert('View Transitions werden in deinem Browser nicht unterstützt.');
+        return;
+      }
+      document.startViewTransition(() => {
+        document.body.style.background =
+          'linear-gradient(to right, #ffdede, #ffe9d0)';
+      });
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark');
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
